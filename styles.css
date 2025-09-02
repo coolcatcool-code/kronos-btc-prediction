@@ -1,0 +1,555 @@
+/* --- 全局样式重置 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- 平滑滚动 --- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- 主体样式 --- */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 50%, #EBF4F8 100%);
+    min-height: 100vh;
+    color: #2c3e50;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+/* --- 容器样式 --- */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* --- 页眉样式 --- */
+.header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 3rem 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(17, 97, 107, 0.15);
+    border-bottom: 1px solid rgba(123, 189, 182, 0.2);
+    margin-bottom: 30px;
+    border-radius: 24px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(17, 97, 107, 0.1);
+    margin-bottom: 10px;
+}
+
+/* --- 更新信息区域 --- */
+.update-info {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 12px 40px rgba(17, 97, 107, 0.12);
+    border: 1px solid rgba(123, 189, 182, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #2c3e50;
+}
+
+.update-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 50px rgba(17, 97, 107, 0.18);
+}
+
+/* --- 刷新按钮样式 --- */
+.refresh-btn {
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 8px 25px rgba(17, 97, 107, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.refresh-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(17, 97, 107, 0.35);
+    background: linear-gradient(135deg, #0d4f57 0%, #6ba89e 100%);
+}
+
+/* --- 按钮点击反馈动画 --- */
+.refresh-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s ease;
+}
+
+.refresh-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.refresh-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* --- 状态指示器 --- */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background: #10b981;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* --- 时间选择器 --- */
+.timeframe-selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 40px rgba(17, 97, 107, 0.12);
+    border: 1px solid rgba(123, 189, 182, 0.3);
+}
+
+.timeframe-btn {
+    background: rgba(255, 255, 255, 0.8);
+    color: #11616B;
+    border: 2px solid rgba(123, 189, 182, 0.3);
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeframe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(17, 97, 107, 0.15);
+    background: rgba(123, 189, 182, 0.1);
+}
+
+.timeframe-btn.active {
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 8px 25px rgba(17, 97, 107, 0.25);
+}
+
+/* --- 按钮点击反馈动画 --- */
+.timeframe-btn:active {
+    transform: translateY(0) scale(0.95);
+    transition: all 0.1s ease;
+}
+
+.timeframe-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.timeframe-btn:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* --- 预测区域 --- */
+.prediction-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.prediction-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 指标容器 --- */
+.metrics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+/* --- 指标卡片 --- */
+.metric-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 16px 40px rgba(17, 97, 107, 0.12);
+    border: 1px solid rgba(123, 189, 182, 0.25);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #11616B 0%, #7BBDB6 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(17, 97, 107, 0.2);
+}
+
+.metric-card:hover::before {
+    opacity: 1;
+}
+
+.metric-title {
+    font-size: 0.95rem;
+    color: #11616B;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.metric-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-description {
+    font-size: 0.95rem;
+    color: #7BBDB6;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* --- 图表容器 --- */
+.chart-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    box-shadow: 0 16px 50px rgba(17, 97, 107, 0.12);
+    border: 1px solid rgba(123, 189, 182, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-container:hover {
+    box-shadow: 0 20px 60px rgba(17, 97, 107, 0.15);
+}
+
+.chart-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #11616B;
+    letter-spacing: -0.01em;
+}
+
+.chart-description {
+    color: #7BBDB6;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.chart-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(17, 97, 107, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.chart-img:hover {
+    transform: scale(1.02);
+}
+
+/* --- 方法论和关于部分 --- */
+.methodology, .about {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 12px 40px rgba(17, 97, 107, 0.1);
+    border: 1px solid rgba(123, 189, 182, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.methodology-title, .about-title {
+    color: #11616B;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 15px;
+}
+
+.methodology-content {
+    color: #555;
+    line-height: 1.6;
+}
+
+.methodology-content ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.methodology-content li {
+    margin-bottom: 8px;
+}
+
+.about-content {
+    color: #7BBDB6;
+    line-height: 1.7;
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.project-links a {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-links a:first-child {
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    color: white;
+    box-shadow: 0 4px 16px rgba(17, 97, 107, 0.2);
+}
+
+.project-links a:last-child {
+    background: rgba(255, 255, 255, 0.9);
+    color: #11616B;
+    border: 2px solid rgba(123, 189, 182, 0.3);
+}
+
+.project-links a:hover {
+    transform: translateY(-2px);
+}
+
+/* --- 键盘导航支持 --- */
+.timeframe-btn:focus,
+.refresh-btn:focus,
+.project-links a:focus {
+    outline: 3px solid rgba(123, 189, 182, 0.5);
+    outline-offset: 2px;
+}
+
+/* --- 语言切换器样式 --- */
+.language-switcher {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    padding-bottom: 20px;
+}
+
+.lang-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(123, 189, 182, 0.3);
+    background: rgba(255, 255, 255, 0.9);
+    color: #11616B;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.lang-btn:hover {
+    background: rgba(123, 189, 182, 0.1);
+    border-color: #7BBDB6;
+    color: #11616B;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(17, 97, 107, 0.15);
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(17, 97, 107, 0.25);
+}
+
+.lang-btn:focus {
+    outline: 3px solid rgba(123, 189, 182, 0.5);
+    outline-offset: 2px;
+}
+
+/* --- 语言切换动画 --- */
+[data-i18n] {
+    transition: opacity 0.2s ease;
+}
+
+.language-switching [data-i18n] {
+    opacity: 0.7;
+}
+
+/* --- 响应式设计 --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .update-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .timeframe-selector {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeframe-btn {
+        min-width: auto;
+    }
+
+    .metrics-container {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-value {
+        font-size: 2.5rem;
+    }
+
+    .chart-container {
+        padding: 1.5rem;
+    }
+
+    .methodology, .about {
+        padding: 1.5rem;
+    }
+
+    .project-links {
+        flex-direction: column;
+    }
+}
+
+/* --- 可访问性增强 --- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* --- 高对比度模式支持 --- */
+@media (prefers-contrast: high) {
+    .metric-card,
+    .chart-container,
+    .update-info,
+    .timeframe-selector,
+    .methodology,
+    .about {
+        border: 2px solid #000;
+    }
+}
