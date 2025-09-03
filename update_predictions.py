@@ -236,8 +236,8 @@ def git_commit_and_push(commit_message):
     print("Performing Git operations...")
     try:
         os.chdir(Config["REPO_PATH"])
-        # Add all prediction chart files and index.html
-        files_to_add = ['index.html']
+        # Add all prediction chart files, index.html, and styles.css
+        files_to_add = ['index.html', 'styles.css']
         for interval in Config["INTERVALS"]:
             files_to_add.append(f'prediction_chart_{interval}.png')
         subprocess.run(['git', 'add'] + files_to_add, check=True, capture_output=True, text=True)
@@ -284,7 +284,7 @@ def main_task(model):
     update_html(metrics)
 
     commit_message = f"Auto-update forecast for {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC"
-    # git_commit_and_push(commit_message)
+    git_commit_and_push(commit_message)
     # Final cleanup
     del metrics
     gc.collect()
@@ -322,4 +322,4 @@ if __name__ == '__main__':
 
     loaded_model = load_model()
     main_task(loaded_model)  # Run once on startup
-    #run_scheduler(loaded_model)  # Start the schedule
+    run_scheduler(loaded_model)  # Start the schedule
