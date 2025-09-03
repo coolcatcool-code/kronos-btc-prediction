@@ -1,9 +1,0 @@
-Kronos预测数据更新摘要
-更新时间: 2025-09-03 11:41:32
-工作目录: C:\Users\Zero\Kronos-demo-master
-Python版本: 3.11.9
-
-生成的文件:
-- prediction_chart_1h.png (170614 bytes, 2025-09-03 11:41:09)
-- prediction_chart_4h.png (177069 bytes, 2025-09-03 11:41:20)
-- prediction_chart_1d.png (154797 bytes, 2025-09-03 11:41:31)
