@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kronos Live BTC/USDT 预测仪表板</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 data-i18n="title">Kronos Live BTC/USDT 预测仪表板</h1>
+            </div>
+            <div class="language-switcher">
+                <button id="lang-zh" class="lang-btn active" onclick="switchLanguage('zh')" title="中文">中文</button>
+                <button id="lang-en" class="lang-btn" onclick="switchLanguage('en')" title="English">EN</button>
+            </div>
+        </header>
+
+        <div class="update-info">
+             <div>
+                 <div class="update-time">
+                     <span class="status-indicator"></span>
+                     <span data-i18n="lastUpdate">最后更新时间:</span> <strong id="update-time">2025-09-03 03:41:31</strong>
+                 </div>
+                 <div class="data-source"><span data-i18n="dataSource">数据来源:</span> Binance</div>
+             </div>
+             <button class="refresh-btn" onclick="location.reload()">
+                 <span data-i18n="refreshData">刷新数据</span>
+             </button>
+         </div>
+
+         <!-- 时间维度选择器 -->
+         <div class="timeframe-selector">
+             <button class="timeframe-btn active" onclick="showTimeframe('1h')" data-i18n="timeframe1h">1小时</button>
+             <button class="timeframe-btn" onclick="showTimeframe('4h')" data-i18n="timeframe4h">4小时</button>
+             <button class="timeframe-btn" onclick="showTimeframe('1d')" data-i18n="timeframe1d">1天</button>
+         </div>
+
+        <!-- 1小时预测结果 -->
+         <div id="prediction-1h" class="prediction-section active">
+
+            
+            <!-- 指标卡片 -->
+            <div class="metrics-container">
+                <div class="metric-card upside">
+                    <div class="metric-title" data-i18n="upsideProbability">上涨概率</div>
+                    <div class="metric-value" id="upside-prob-1h">50.0%</div>
+                    <div class="metric-description" data-i18n="upsideDescription1h">
+                        未来24小时BTC/USDT价格上涨的概率
+                    </div>
+                </div>
+                <div class="metric-card volatility">
+                    <div class="metric-title" data-i18n="volatilityAmplification">波动性放大</div>
+                    <div class="metric-value" id="vol-amp-prob-1h">13.3%</div>
+                    <div class="metric-description" data-i18n="volatilityDescription1h">
+                        未来24小时波动性放大的概率
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kronos预测图表展示区域 -->
+            <div class="chart-container">
+                <div class="chart-title" data-i18n="chartTitle1h">24小时概率预测图表</div>
+                <div class="chart-description" data-i18n="chartDescription1h">
+                    基于1小时K线数据的Kronos模型预测结果
+                </div>
+                <div class="prediction-chart-container">
+                    <img src="prediction_chart_1h.png" alt="BTC/USDT 1h Price and Volume Forecast Chart" class="chart-img">
+                </div>
+             </div>
+         </div>
+
+         <!-- 4小时预测结果 -->
+         <div id="prediction-4h" class="prediction-section">
+             <!-- 指标卡片 -->
+             <div class="metrics-container">
+                 <div class="metric-card upside">
+                     <div class="metric-title" data-i18n="upsideProbability">上涨概率</div>
+                     <div class="metric-value" id="upside-prob-4h">40.0%</div>
+                     <div class="metric-description" data-i18n="upsideDescription4h">
+                         未来24个间隔BTC/USDT价格上涨的概率
+                     </div>
+                 </div>
+                 <div class="metric-card volatility">
+                     <div class="metric-title" data-i18n="volatilityAmplification">波动性放大</div>
+                     <div class="metric-value" id="vol-amp-prob-4h">23.3%</div>
+                     <div class="metric-description" data-i18n="volatilityDescription4h">
+                         未来24个间隔波动性放大的概率
+                     </div>
+                 </div>
+             </div>
+
+             <!-- Kronos预测图表展示区域 -->
+             <div class="chart-container">
+                 <div class="chart-title" data-i18n="chartTitle4h">24间隔概率预测图表</div>
+                 <div class="chart-description" data-i18n="chartDescription4h">
+                     基于4小时K线数据的Kronos模型预测结果
+                 </div>
+                 <div class="prediction-chart-container">
+                     <img src="prediction_chart_4h.png" alt="BTC/USDT 4h Price and Volume Forecast Chart" class="chart-img">
+                 </div>
+             </div>
+         </div>
+
+         <!-- 1天预测结果 -->
+         <div id="prediction-1d" class="prediction-section">
+             <!-- 指标卡片 -->
+             <div class="metrics-container">
+                 <div class="metric-card upside">
+                     <div class="metric-title" data-i18n="upsideProbability">上涨概率</div>
+                     <div class="metric-value" id="upside-prob-1d">6.7%</div>
+                     <div class="metric-description" data-i18n="upsideDescription1d">
+                         未来24个间隔BTC/USDT价格上涨的概率
+                     </div>
+                 </div>
+                 <div class="metric-card volatility">
+                     <div class="metric-title" data-i18n="volatilityAmplification">波动性放大</div>
+                     <div class="metric-value" id="vol-amp-prob-1d">96.7%</div>
+                     <div class="metric-description" data-i18n="volatilityDescription1d">
+                         未来24个间隔波动性放大的概率
+                     </div>
+                 </div>
+             </div>
+
+             <!-- Kronos预测图表展示区域 -->
+             <div class="chart-container">
+                 <div class="chart-title" data-i18n="chartTitle1d">24间隔概率预测图表</div>
+                 <div class="chart-description" data-i18n="chartDescription1d">
+                     基于1天K线数据的Kronos模型预测结果
+                 </div>
+                 <div class="prediction-chart-container">
+                     <img src="prediction_chart_1d.png" alt="BTC/USDT 1d Price and Volume Forecast Chart" class="chart-img">
+                 </div>
+             </div>
+         </div>
+
+         <div class="methodology" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(25px); border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem; box-shadow: 0 12px 40px rgba(17, 97, 107, 0.1); border: 1px solid rgba(123, 189, 182, 0.25); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+            <div class="methodology-title" style="color: #11616B; font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; margin-bottom: 15px;" data-i18n="methodologyTitle">方法论概述</div>
+            <div class="methodology-content" style="color: #555; line-height: 1.6;">
+                <p data-i18n="methodologyIntro">此演示展示了<strong>Kronos</strong>的预测结果，这是一个在金融市场"语言"上预训练的基础模型。预测使用以下过程生成：</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li style="margin-bottom: 8px;" data-i18n="methodologyModel"><strong>模型：</strong> 使用Kronos-mini（4M参数）模型自回归预测未来K线数据。</li>
+                    <li style="margin-bottom: 8px;" data-i18n="methodologyData"><strong>数据上下文：</strong> 模型使用来自Binance的最近360小时（约15天）BTC/USDT 1小时K线数据作为每次新预测的上下文。</li>
+                    <li style="margin-bottom: 8px;" data-i18n="methodologyProbability"><strong>概率预测：</strong> 我们采用蒙特卡罗采样（N=30路径）生成可能的未来价格轨迹分布，而不仅仅是单点预测。</li>
+                    <li style="margin-bottom: 8px;" data-i18n="methodologyInsights"><strong>衍生洞察：</strong> 分析结果分布以产生平均预测（实线）、不确定性范围（阴影区域）和上述关键概率指标。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(25px); border-radius: 20px; padding: 2.5rem; box-shadow: 0 12px 40px rgba(17, 97, 107, 0.1); border: 1px solid rgba(123, 189, 182, 0.25); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+            <div class="about-title" style="color: #11616B; font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; margin-bottom: 15px;" data-i18n="aboutTitle">关于Kronos项目</div>
+            <div class="about-content" style="color: #7BBDB6; line-height: 1.7; font-weight: 500; font-size: 1.05rem; margin-bottom: 20px;" data-i18n="aboutContent">
+                Kronos是首个开源的金融K线基础模型，在来自45个以上全球交易所的数据上训练。它被设计为服务于多样化量化金融任务的统一模型。
+            </div>
+            <div class="project-links" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://github.com/shiyu-coder/Kronos" target="_blank" style="background: linear-gradient(135deg, #11616B 0%, #7BBDB6 100%); color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(17, 97, 107, 0.2);" data-i18n="viewOnGitHub">在GitHub上查看</a>
+                <a href="https://arxiv.org/abs/2508.02739" target="_blank" style="background: rgba(255, 255, 255, 0.9); color: #11616B; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(123, 189, 182, 0.3);" data-i18n="readPaper">阅读论文</a>
+            </div>
+        </div>
+
+        <style>
+            @media (max-width: 768px) {
+                .container {
+                    padding: 15px;
+                }
+
+                .header h1 {
+                    font-size: 2rem;
+                }
+
+                .update-info {
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+                }
+
+                .metrics-container {
+                    grid-template-columns: 1fr;
+                }
+
+                .metric-value {
+                    font-size: 2.5rem;
+                }
+            }
+        </style>
+
+         <script>
+             let currentTimeframeIndex = 0;
+             const timeframes = ['1h', '4h', '1d'];
+             let currentLanguage = 'zh';
+             
+             // 多语言文本数据
+             const translations = {
+                 zh: {
+                     title: 'Kronos Live BTC/USDT 预测仪表板',
+                     lastUpdate: '最后更新时间:',
+                     dataSource: '数据来源:',
+                     refreshData: '刷新数据',
+                     timeframe1h: '1小时',
+                     timeframe4h: '4小时',
+                     timeframe1d: '1天',
+                     upsideProbability: '上涨概率',
+                     volatilityAmplification: '波动性放大',
+                     upsideDescription1h: '未来24小时BTC/USDT价格上涨的概率',
+                     volatilityDescription1h: '未来24小时波动性放大的概率',
+                     upsideDescription4h: '未来24个间隔BTC/USDT价格上涨的概率',
+                     volatilityDescription4h: '未来24个间隔波动性放大的概率',
+                     upsideDescription1d: '未来24个间隔BTC/USDT价格上涨的概率',
+                     volatilityDescription1d: '未来24个间隔波动性放大的概率',
+                     chartTitle1h: '24小时概率预测图表',
+                     chartDescription1h: '基于1小时K线数据的Kronos模型预测结果',
+                     chartTitle4h: '24间隔概率预测图表',
+                     chartDescription4h: '基于4小时K线数据的Kronos模型预测结果',
+                     chartTitle1d: '24间隔概率预测图表',
+                     chartDescription1d: '基于1天K线数据的Kronos模型预测结果',
+                     methodologyTitle: '方法论概述',
+                     methodologyIntro: '此演示展示了<strong>Kronos</strong>的预测结果，这是一个在金融市场"语言"上预训练的基础模型。预测使用以下过程生成：',
+                     methodologyModel: '<strong>模型：</strong> 使用Kronos-mini（4M参数）模型自回归预测未来K线数据。',
+                     methodologyData: '<strong>数据上下文：</strong> 模型使用来自Binance的最近360小时（约15天）BTC/USDT 1小时K线数据作为每次新预测的上下文。',
+                     methodologyProbability: '<strong>概率预测：</strong> 我们采用蒙特卡罗采样（N=30路径）生成可能的未来价格轨迹分布，而不仅仅是单点预测。',
+                     methodologyInsights: '<strong>衍生洞察：</strong> 分析结果分布以产生平均预测（实线）、不确定性范围（阴影区域）和上述关键概率指标。',
+                     aboutTitle: '关于Kronos项目',
+                     aboutContent: 'Kronos是首个开源的金融K线基础模型，在来自45个以上全球交易所的数据上训练。它被设计为服务于多样化量化金融任务的统一模型。',
+                     viewOnGitHub: '在GitHub上查看',
+                     readPaper: '阅读论文'
+                 },
+                 en: {
+                     title: 'Kronos Live BTC/USDT Prediction Dashboard',
+                     lastUpdate: 'Last Updated:',
+                     dataSource: 'Data Source:',
+                     refreshData: 'Refresh Data',
+                     timeframe1h: '1 Hour',
+                     timeframe4h: '4 Hours',
+                     timeframe1d: '1 Day',
+                     upsideProbability: 'Upside Probability',
+                     volatilityAmplification: 'Volatility Amplification',
+                     upsideDescription1h: 'Probability of BTC/USDT price increase in the next 24 hours',
+                     volatilityDescription1h: 'Probability of volatility amplification in the next 24 hours',
+                     upsideDescription4h: 'Probability of BTC/USDT price increase in the next 24 intervals',
+                     volatilityDescription4h: 'Probability of volatility amplification in the next 24 intervals',
+                     upsideDescription1d: 'Probability of BTC/USDT price increase in the next 24 intervals',
+                     volatilityDescription1d: 'Probability of volatility amplification in the next 24 intervals',
+                     chartTitle1h: '24-Hour Probability Prediction Chart',
+                     chartDescription1h: 'Kronos model prediction results based on 1-hour candlestick data',
+                     chartTitle4h: '24-Interval Probability Prediction Chart',
+                     chartDescription4h: 'Kronos model prediction results based on 4-hour candlestick data',
+                     chartTitle1d: '24-Interval Probability Prediction Chart',
+                     chartDescription1d: 'Kronos model prediction results based on 1-day candlestick data',
+                     methodologyTitle: 'Methodology Overview',
+                     methodologyIntro: 'This demo showcases prediction results from <strong>Kronos</strong>, a foundation model pre-trained on the "language" of financial markets. Predictions are generated using the following process:',
+                     methodologyModel: '<strong>Model:</strong> Uses Kronos-mini (4M parameters) model to autoregressively predict future candlestick data.',
+                     methodologyData: '<strong>Data Context:</strong> The model uses the most recent 360 hours (~15 days) of BTC/USDT 1-hour candlestick data from Binance as context for each new prediction.',
+                     methodologyProbability: '<strong>Probabilistic Prediction:</strong> We employ Monte Carlo sampling (N=30 paths) to generate a distribution of possible future price trajectories, rather than just point predictions.',
+                     methodologyInsights: '<strong>Derived Insights:</strong> Analyze the resulting distribution to produce mean predictions (solid lines), uncertainty ranges (shaded areas), and the key probability metrics above.',
+                     aboutTitle: 'About Kronos Project',
+                     aboutContent: 'Kronos is the first open-source financial candlestick foundation model, trained on data from 45+ global exchanges. It is designed as a unified model to serve diverse quantitative finance tasks.',
+                     viewOnGitHub: 'View on GitHub',
+                     readPaper: 'Read Paper'
+                 }
+             };
+             
+             // 语言切换功能
+             function switchLanguage(lang) {
+                 currentLanguage = lang;
+                 localStorage.setItem('preferredLanguage', lang);
+                 updatePageLanguage();
+                 updateLanguageButtons();
+             }
+             
+             function updatePageLanguage() {
+                 const elements = document.querySelectorAll('[data-i18n]');
+                 elements.forEach(element => {
+                     const key = element.getAttribute('data-i18n');
+                     if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                         element.innerHTML = translations[currentLanguage][key];
+                     }
+                 });
+             }
+             
+             function updateLanguageButtons() {
+                 const zhBtn = document.getElementById('lang-zh');
+                 const enBtn = document.getElementById('lang-en');
+                 
+                 if (zhBtn && enBtn) {
+                     zhBtn.classList.toggle('active', currentLanguage === 'zh');
+                     enBtn.classList.toggle('active', currentLanguage === 'en');
+                 }
+             }
+             
+             function initializeLanguage() {
+                 // 从本地存储获取用户偏好语言
+                 const savedLanguage = localStorage.getItem('preferredLanguage');
+                 if (savedLanguage && translations[savedLanguage]) {
+                     currentLanguage = savedLanguage;
+                 }
+                 updatePageLanguage();
+                 updateLanguageButtons();
+             }
+             
+             function showTimeframe(timeframe, buttonElement = null) {
+                 // 隐藏所有预测区域
+                 const sections = document.querySelectorAll('.prediction-section');
+                 sections.forEach(section => {
+                     section.classList.remove('active');
+                 });
+
+                 // 移除所有按钮的active状态
+                 const buttons = document.querySelectorAll('.timeframe-btn');
+                 buttons.forEach(btn => {
+                     btn.classList.remove('active');
+                 });
+
+                 // 显示选中的预测区域
+                 document.getElementById('prediction-' + timeframe).classList.add('active');
+
+                 // 激活选中的按钮
+                 const targetButton = buttonElement || event.target;
+                 targetButton.classList.add('active');
+                 
+                 // 更新当前索引
+                 currentTimeframeIndex = timeframes.indexOf(timeframe);
+             }
+             
+             // 键盘导航支持
+             function handleKeyboardNavigation(event) {
+                 const buttons = document.querySelectorAll('.timeframe-btn');
+                 const refreshBtn = document.querySelector('.refresh-btn');
+                 const projectLinks = document.querySelectorAll('.project-links a');
+                 
+                 // Tab键导航
+                 if (event.key === 'Tab') {
+                     return; // 让浏览器处理默认Tab行为
+                 }
+                 
+                 // 箭头键导航时间选择器
+                 if (event.target.classList.contains('timeframe-btn')) {
+                     if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                         event.preventDefault();
+                         const prevIndex = currentTimeframeIndex > 0 ? currentTimeframeIndex - 1 : timeframes.length - 1;
+                         const prevButton = buttons[prevIndex];
+                         prevButton.focus();
+                         showTimeframe(timeframes[prevIndex], prevButton);
+                     } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                         event.preventDefault();
+                         const nextIndex = currentTimeframeIndex < timeframes.length - 1 ? currentTimeframeIndex + 1 : 0;
+                         const nextButton = buttons[nextIndex];
+                         nextButton.focus();
+                         showTimeframe(timeframes[nextIndex], nextButton);
+                     }
+                 }
+                 
+                 // Enter和Space键激活按钮
+                 if (event.key === 'Enter' || event.key === ' ') {
+                     if (event.target.classList.contains('timeframe-btn')) {
+                         event.preventDefault();
+                         const timeframe = event.target.textContent.includes('1小时') ? '1h' : 
+                                         event.target.textContent.includes('4小时') ? '4h' : '1d';
+                         showTimeframe(timeframe, event.target);
+                     } else if (event.target.classList.contains('refresh-btn')) {
+                         event.preventDefault();
+                         location.reload();
+                     }
+                 }
+                 
+                 // 数字键快速切换
+                 if (event.key >= '1' && event.key <= '3') {
+                     event.preventDefault();
+                     const index = parseInt(event.key) - 1;
+                     const button = buttons[index];
+                     if (button) {
+                         button.focus();
+                         showTimeframe(timeframes[index], button);
+                     }
+                 }
+                 
+                 // R键刷新
+                 if (event.key === 'r' || event.key === 'R') {
+                     if (!event.target.matches('input, textarea')) {
+                         event.preventDefault();
+                         location.reload();
+                     }
+                 }
+             }
+             
+             // 平滑滚动到指定元素
+             function smoothScrollTo(element) {
+                 element.scrollIntoView({
+                     behavior: 'smooth',
+                     block: 'start'
+                 });
+             }
+
+             // 页面加载时初始化
+             document.addEventListener('DOMContentLoaded', function() {
+                 // 初始化语言设置
+                 initializeLanguage();
+                 
+                 // 默认显示1小时数据
+                 document.getElementById('prediction-1h').classList.add('active');
+                 
+                 // 添加键盘事件监听
+                 document.addEventListener('keydown', handleKeyboardNavigation);
+                 
+                 // 为所有可交互元素添加焦点样式
+                 const interactiveElements = document.querySelectorAll('.timeframe-btn, .refresh-btn, .project-links a');
+                 interactiveElements.forEach(element => {
+                     element.setAttribute('tabindex', '0');
+                 });
+                 
+                 // 添加点击时的平滑滚动
+                 const timeframeButtons = document.querySelectorAll('.timeframe-btn');
+                 timeframeButtons.forEach(button => {
+                     button.addEventListener('click', function() {
+                         setTimeout(() => {
+                             const activeSection = document.querySelector('.prediction-section.active');
+                             if (activeSection) {
+                                 smoothScrollTo(activeSection);
+                             }
+                         }, 100);
+                     });
+                 });
+             });
+         </script>
+     </div>
+ </body>
+ </html>
