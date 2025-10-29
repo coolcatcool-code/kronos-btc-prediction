@@ -45,7 +45,7 @@ jobs:
         git push
         
     - name: Deploy to Cloudflare Pages (optional)
-      if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      continue-on-error: true
       uses: cloudflare/pages-action@v1
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
