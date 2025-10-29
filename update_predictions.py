@@ -6,6 +6,9 @@ import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+# 设置matplotlib后端为Agg，适用于无显示环境（如CI/CD）
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -26,7 +29,6 @@ Config = {
     "VOL_WINDOW": 24,
 }
 
-b
 def load_model():
     """Loads the Kronos model and tokenizer."""
     print("Loading Kronos model...")
@@ -233,6 +235,11 @@ def update_html(metrics):
 
 def git_commit_and_push(commit_message):
     """Adds, commits, and pushes specified files to the Git repository."""
+    # 在CI环境中跳过git操作，由GitHub Actions处理
+    if os.getenv('GITHUB_ACTIONS'):
+        print("Running in GitHub Actions, skipping git operations (handled by workflow)")
+        return
+        
     print("Performing Git operations...")
     try:
         os.chdir(Config["REPO_PATH"])
@@ -322,4 +329,7 @@ if __name__ == '__main__':
 
     loaded_model = load_model()
     main_task(loaded_model)  # Run once on startup
-    run_scheduler(loaded_model)  # Start the schedule
+    
+    # 在CI环境中只运行一次，本地环境启动调度器
+    if not os.getenv('GITHUB_ACTIONS'):
+        run_scheduler(loaded_model)  # Start the schedule
